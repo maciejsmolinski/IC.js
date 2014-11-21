@@ -48,7 +48,7 @@ You can mix options, examples:
 
 ## Your app in the browser
 
-You can preview your app under http://localhost:8080 address unless you specified different port.
+You can preview your app under [http://localhost:8080](http://localhost:8080) address unless you specified different port.
 
 ## Reload app while developing your app
 
