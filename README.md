@@ -50,9 +50,9 @@ You can mix options, examples:
 
 You can preview your app under [http://localhost:8080](http://localhost:8080) address unless you specified different port.
 
-## Reload app while developing your app
+## Reload app automatically every time you change the code
 
-The app doesn't reload itself. To avoid overhead with restarting the app manually every time you change your code, you can use [nodemon](https://github.com/remy/nodemon) tool. Simply run following commands:
+The app doesn't reload itself automatically. To avoid overhead with restarting the app manually every time you change your code, you can use [nodemon](https://github.com/remy/nodemon) tool. Simply run following commands:
 
 ``` bash
 sudo npm install -g nodemon
@@ -70,7 +70,7 @@ DEBUG=IC nodemon ./bin/www
 Since [Nunjucks](http://mozilla.github.io/nunjucks/) support [builtin filters](http://mozilla.github.io/nunjucks/templating.html#builtin-filters) as well as [custom filters](http://mozilla.github.io/nunjucks/api.html#custom-filters), you can roll out your own filters easily by creating JavaScript file in the `views/filters` directory.
 
 ``` javascript
-  // Filename: views/filters/nl2br.js
+  // Location: views/filters/nl2br.js
 
   module.exports = function (nunjucks) {
 
