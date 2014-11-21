@@ -1,13 +1,14 @@
 // Include all production dependencies
-var bodyParser    = require('body-parser');
-var nunjucks      = require('nunjucks');
-var cookieParser  = require('cookie-parser');
-var express       = require('express');
-var favicon       = require('serve-favicon');
-var logger        = require('morgan');
-var middleware    = require('require-all')(__dirname + '/middleware');
-var path          = require('path');
-var routes        = require('./routes/index');
+var bodyParser   = require('body-parser');
+var nunjucks     = require('nunjucks');
+var cookieParser = require('cookie-parser');
+var express      = require('express');
+var favicon      = require('serve-favicon');
+var logger       = require('morgan');
+var middleware   = require('require-all')(__dirname + '/middleware');
+var filters      = require('require-all')(__dirname + '/views/filters');
+var path         = require('path');
+var routes       = require('./routes/index');
 
 // Bootstrap Express Instance
 var app           = express();
@@ -20,6 +21,11 @@ var nunjucksEnv = nunjucks.configure('views', {
   autoescape: true,
   express: app,
   watch: true
+});
+
+// Extend Nunjucks with custom filters from `views/filters/` directory
+Object.keys(filters).forEach(function (filter) {
+  nunjucksEnv.addFilter(filter, filters[filter](nunjucks));
 });
 
 // App Setting: Set Views Extension

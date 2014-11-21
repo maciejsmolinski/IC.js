@@ -63,5 +63,35 @@ In your app directory:
 DEBUG=IC nodemon ./bin/www
 ```
 
+## Extending the application
+
+### Extending Views
+
+Since [Nunjucks](http://mozilla.github.io/nunjucks/) support [builtin filters](http://mozilla.github.io/nunjucks/templating.html#builtin-filters) as well as [custom filters](http://mozilla.github.io/nunjucks/api.html#custom-filters), you can roll out your own filters easily by creating JavaScript file in the `views/filters` directory.
+
+``` javascript
+  // Filename: views/filters/nl2br.js
+
+  module.exports = function (nunjucks) {
+
+    /**
+     * Replaces all occurences of newline with <br> tags
+     *
+     *   Sample Usage:
+     *
+     *     {{ 'Hello\n\nWorld' | nl2br }} -> Hello<br><br>World
+     *
+     */
+    return function (string) {
+      return new nunjucks.runtime.SafeString(string.replace(/\n/g, '<br>'));
+    }
+
+  }
+}
+```
+
+The code above would create `nl2br` filter that will be globally available in all your nunjucks templates. Filter is nothing else than the name of the file without extension, e.g. `nl2br.js -> nl2br`.
+
+
 ## Contributing
 Feel free to contribute or contact me at contact@maciejsmolinski.com with any questions
