@@ -46,5 +46,22 @@ You can mix options, examples:
   NODE_ENV=production PORT=80 DEBUG=IC npm start
 ```
 
+## Your app in the browser
+
+You can preview your app under http://localhost:8080 address unless you specified different port.
+
+## Reload app while developing your app
+
+The app doesn't reload itself. To avoid overhead with restarting the app manually every time you change your code, you can use [nodemon](https://github.com/remy/nodemon) tool. Simply run following commands:
+
+``` bash
+sudo npm install -g nodemon
+```
+
+In your app directory:
+``` bash
+DEBUG=IC nodemon ./bin/www
+```
+
 ## Contributing
 Feel free to contribute or contact me at contact@maciejsmolinski.com with any questions
