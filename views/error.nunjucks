@@ -1,4 +1,4 @@
-{% extends '/views/layouts/main.nunjucks' %}
+{% extends 'layouts/main.nunjucks' %}
 
 {% block content %}
   <h1>{{ message }}</h1>

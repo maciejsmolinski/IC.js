@@ -1,6 +1,6 @@
 // Include all production dependencies
 var bodyParser    = require('body-parser');
-var consolidate   = require('consolidate');
+var nunjucks      = require('nunjucks');
 var cookieParser  = require('cookie-parser');
 var express       = require('express');
 var favicon       = require('serve-favicon');
@@ -15,12 +15,15 @@ var app           = express();
 // Helper function
 var isDevelopment = app.get('env') === 'development';
 
-// App Setting: Views folder
-app.set('views', path.join(__dirname, 'views'));
-// App Setting: Views extension
+// Configure View Engine (Nunjucks)
+var nunjucksEnv = nunjucks.configure('views', {
+  autoescape: true,
+  express: app,
+  watch: true
+});
+
+// App Setting: Set Views Extension
 app.set('view engine', 'nunjucks');
-// App Setting: View Engine Renderer Handler
-app.engine('nunjucks', consolidate.nunjucks);
 
 // App Middlewares (logging, parsing input, static dir)
 app.use(logger(isDevelopment ? 'dev' : 'common'));       // Log HTTP Requests in console. Formats: https://github.com/expressjs/morgan
