@@ -3,8 +3,8 @@
 InterCity.js - express.js-based, modular and lightweight NodeJS framework/structure
 
 Main components:
-* Express.js (HTTP Server)
-* Nunjucks   (View Engine)
+* [Express.js](http://expressjs.com/) (HTTP Server)
+* [Nunjucks](http://mozilla.github.io/nunjucks/) (View Engine)
 
 ## Installation
 
@@ -43,7 +43,7 @@ Setting Environment (default=development):
 You can mix options, examples:
 
 ``` bash
-  NODE_ENV=prodiction PORT=80 DEBUG=IC npm start
+  NODE_ENV=production PORT=80 DEBUG=IC npm start
 ```
 
 ## Contributing
