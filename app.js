@@ -11,7 +11,7 @@ var middlewareAfter  = require('require-all')(__dirname + '/config/middleware/af
 
 var filters      = require('require-all')(__dirname + '/config/filters');
 var path         = require('path');
-var routes       = require('./routes/routes');
+var routes       = require('./config/routes');
 
 // Bootstrap Express Instance
 var app           = express();
