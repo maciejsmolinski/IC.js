@@ -1,9 +1,33 @@
 #!/usr/bin/env node
-var debug = require('debug')('IC');
-var app = require('../app');
+var cli   = require('commander');
+var pkg   = require('../package.json');
 
-app.set('port', process.env.PORT || 8080);
+cli
+ .version(pkg.version)
+ .option('-e, --environment [type]', 'set environment to <development|production>. Default is development', 'development')
+ .option('-p, --port [number]', 'listen to HTTP requests on [number] port. Default is 8080', 8080)
+ .option('-d, --debug', 'display application logs', false)
+ .option('-v, --verbose', 'display all available logs', false)
+ .parse(process.argv);
 
-var server = app.listen(app.get('port'), function() {
-  debug('Server listening on port ' + server.address().port);
-});
+// Set NODE_ENV according to environment from CLI options
+if (cli.environment) {
+  process.env.NODE_ENV = cli.environment;
+}
+
+// Set DEBUG according to environment from CLI options
+if (cli.debug) {
+  process.env.DEBUG = pkg.name;
+}
+
+// Set DEBUG according to environment from CLI options
+if (cli.verbose) {
+  process.env.DEBUG = '*';
+}
+
+// Set PORT according to environment from CLI options
+if (cli.port) {
+  process.env.PORT = cli.port;
+}
+
+require('..').serve();
