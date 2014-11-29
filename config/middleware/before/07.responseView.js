@@ -1,3 +1,4 @@
+// Provide res.view method that finds template name automatically and renders it with given data
 module.exports = function (req, res, next) {
 
   res.view = function (/* <data, [cb]> || <view, data, [cb]> */) {
