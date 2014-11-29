@@ -5,7 +5,10 @@ var cookieParser = require('cookie-parser');
 var express      = require('express');
 var favicon      = require('serve-favicon');
 var logger       = require('morgan');
-var middleware   = require('require-all')(__dirname + '/config/middleware');
+
+var middlewareBefore = require('require-all')(__dirname + '/config/middleware/before/');
+var middlewareAfter  = require('require-all')(__dirname + '/config/middleware/after/');
+
 var filters      = require('require-all')(__dirname + '/config/filters');
 var path         = require('path');
 var routes       = require('./routes/routes');
@@ -39,7 +42,10 @@ app.use(cookieParser());                                 // Parse Cookies automa
 app.use(express.static(path.join(__dirname, 'public'))); // Serve static assets from `public/` dir
 // app.use(favicon(__dirname + '/public/favicon.ico'));    // Exclude favicon.ico requests from logs automatically, cache icon in the memory
 
-app.use(middleware.responseView);
+// Use all before-dispatch middleware
+Object.keys(middlewareBefore).forEach(function (middleware) {
+  app.use(middlewareBefore[middleware]);
+});
 
 // Plug in all routes from `routes/` directory
 Object.keys(routes).forEach(function (route) {
@@ -50,11 +56,10 @@ Object.keys(routes).forEach(function (route) {
   app.use(routeToAdd);
 });
 
-// Not Found Handler: Catch 404 and forward to error handler
-app.use(middleware.notFound);
-
-// Error Handlers: Depending on the environment, display detailed (development) or non-detailed (production) server error
-app.use(isDevelopment ? middleware.detailedServerError : middleware.serverError);
+// Use all after-dispatch middleware
+Object.keys(middlewareAfter).forEach(function (middleware) {
+  app.use(middlewareAfter[middleware]);
+});
 
 app.listen(8080, function () {
   console.log('App listens on port 8080');
