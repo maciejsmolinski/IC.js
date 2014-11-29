@@ -25,25 +25,25 @@ Production Environment:
 Setting Port to listen on (default=8080):
 
 ``` bash
-  PORT=8080 npm start
+  PORT=8080 node app.js
 ```
 
 Enabling Server logs (disabled by default):
 
 ``` bash
-  DEBUG=IC npm start
+  DEBUG=IC node app.js
 ```
 
 Setting Environment (default=development):
 
 ``` bash
-  NODE_ENV=<production|development> npm start
+  NODE_ENV=<production|development> node app.js
 ```
 
 You can mix options, examples:
 
 ``` bash
-  NODE_ENV=production PORT=80 DEBUG=IC npm start
+  NODE_ENV=production PORT=80 DEBUG=IC node app.js
 ```
 
 ## Your app in the browser
@@ -60,7 +60,7 @@ sudo npm install -g nodemon
 
 In your app directory:
 ``` bash
-DEBUG=IC nodemon ./bin/www
+DEBUG=IC nodemon app.js
 ```
 
 ## Extending the application
@@ -70,7 +70,7 @@ DEBUG=IC nodemon ./bin/www
 Since [Nunjucks](http://mozilla.github.io/nunjucks/) support [builtin filters](http://mozilla.github.io/nunjucks/templating.html#builtin-filters) as well as [custom filters](http://mozilla.github.io/nunjucks/api.html#custom-filters), you can roll out your own filters easily by creating JavaScript file in the `views/filters` directory.
 
 ``` javascript
-  // Location: views/filters/nl2br.js
+  // Location: config/filters/nl2br.js
 
   module.exports = function (nunjucks) {
 
@@ -84,9 +84,9 @@ Since [Nunjucks](http://mozilla.github.io/nunjucks/) support [builtin filters](h
      */
     return function (string) {
       return new nunjucks.runtime.SafeString(string.replace(/\n/g, '<br>'));
-    }
+    };
 
-  }
+  };
 }
 ```
 
