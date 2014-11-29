@@ -10,6 +10,6 @@ module.exports = function (nunjucks) {
    */
   return function (string) {
     return new nunjucks.runtime.SafeString(string.replace(/\n/g, '<br>'));
-  }
+  };
 
-}
+};
